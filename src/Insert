@@ -1,0 +1,55 @@
+Sub GenerateInsertSQLToAnotherSheet()
+    Dim wsSource As Worksheet
+    Dim wsTarget As Worksheet
+    Dim lastRow As Long
+    Dim i As Long
+    
+    ' Set Source(data) Sheet and Result Sheet
+    Set wsSource = ThisWorkbook.Sheets("DataSheet")   ' Name of the sheet with the data
+    Set wsTarget = ThisWorkbook.Sheets("ResultSheet") ' Name of the sheet on which to output the results
+
+    ' Last row by column place of the source sheet
+    lastRow = wsSource.Cells(wsSource.Rows.Count, "B").End(xlUp).Row
+
+    wsTarget.Range("D:D").ClearContents
+
+    For i = 2 To lastRow ' 
+        Dim colB As String
+        Dim colC As String
+        Dim colD As String
+        Dim colE As String
+        Dim colF As String
+        Dim colG As String
+        Dim colH As String
+        Dim colI As String
+        Dim colJ As String
+        Dim colK As String
+        Dim colL As String
+        Dim colM As String
+        Dim colN As String
+        
+        colB = wsSource.Range("B" & i).Value
+        colC = wsSource.Range("C" & i).Value
+        colD = wsSource.Range("D" & i).Value
+        colE = wsSource.Range("E" & i).Value
+        colF = wsSource.Range("F" & i).Value
+        colG = wsSource.Range("G" & i).Value
+        colH = wsSource.Range("H" & i).Value
+        colI = wsSource.Range("I" & i).Value
+        colJ = wsSource.Range("J" & i).Value
+        colK = wsSource.Range("K" & i).Value
+        colL = wsSource.Range("L" & i).Value
+        colM = wsSource.Range("M" & i).Value
+        colN = wsSource.Range("N" & i).Value
+        
+        Dim sqlLine As String
+        sqlLine = "INSERT INTO table_name (colB, colC, colD, colE, colF, colG, colH, colI, colJ, colL, colM, colN) " & _
+        "VALUES ('" & colB & "', '" & colC & "', '" & colD & "', '" & colE & "', '" & colF & "', '" & colG & "', " & _
+        "'" & colH & "', '" & colI & "', '" & colJ & "', '" & colK & "', '" & colL & "', '" & colM & "'. '" & colN & "');"
+        
+        ' Write result to C col & i row
+        wsTarget.Range("C" & i).Value = sqlLine
+    Next i
+    
+    MsgBox "Make complete" & wsTarget.Name & "INSERT SQL String in sheet "
+End Sub
